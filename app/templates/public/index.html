@@ -5,8 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'imgs/favicon.png') }}">
-    <title>Lista registros con Flask y Python desde MySQL</title>
+    <title>Listar registros con Flask y Python desde MySQL</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/milligram.min.css') }}">
+    <style>
+        h2{
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+    </style>
 </head>
 <body>
    
@@ -14,35 +22,50 @@
     <div class="container">
 
         <div class="row">
-            <h1>Heading</h1>
-            <p>LISTA</p>
+            <div class="column">
+                <h2 class="text-center">
+                    Listar Registros con Flask y Python 🐍 desde MySQL 💥
+                </h2>
+                <hr>
+            </div>
+          </div>
 
+        <div class="row">
+        <!-- {{ dataEmpleados }} -->
+        {% if (dataEmpleados) %}
 
             <table>
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Height</th>
-                    <th>Location</th>
+                    <th>Nombre</th>
+                    <th>Sexo</th>
+                    <th>Te gusta el canal?</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Stephen Curry</td>
-                    <td>27</td>
-                    <td>1,91</td>
-                    <td>Akron, OH</td>
-                  </tr>
-                  <tr>
-                    <td>Klay Thompson</td>
-                    <td>25</td>
-                    <td>2,01</td>
-                    <td>Los Angeles, CA</td>
-                  </tr>
+                    {% for empleado in dataEmpleados %}    
+                        <tr>
+                            <td>{{ empleado.nombre }}</td>
+                            <td>{{ empleado.sexo }}</td>
+                            <td>{{ empleado.likes }}
+                                {% if(empleado.likes == 1) %}
+                                    😀 
+                                {% else %}
+                                    😭
+                                {% endif %}
+                            </td>
+                            <td>{{ empleado.descripcion }}</td>
+                            <td>{{ empleado.fecha }}</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
               </table>
-              
+        {% else %}
+            <p style="text-align: center;">No hay Empleados 😭 </p>
+        {% endif %}
+
         </div>
     </div>
 
