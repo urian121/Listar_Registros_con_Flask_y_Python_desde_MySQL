@@ -1,6 +1,5 @@
 #Importando flask y algunos paquetes(modulos)
 from flask import Flask, render_template, url_for, redirect
-from datetime import datetime
 from confiDB import * #Importando conexion BD
 
 ''' 
@@ -21,8 +20,9 @@ def inicio():
     data = mycursor.fetchall() #fetchall () Obtener todos los registros
     mycursor.close() #cerrando conexion SQL
     conexion_MySQLdb.close() #cerrando conexion de la BD
-    total = mycursor.rowcount
-    return render_template('public/index.html', dataEmpleados = data)
+    total = mycursor.rowcount #total de registros
+    print(total)
+    return render_template('public/index.html', dataEmpleados = data, dataTotal = total)
 
 
 
